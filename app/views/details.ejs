@@ -1,0 +1,64 @@
+<%- include('partials/header') %>
+
+<p class="titleDetailPokemon">Détails de <%= pokemon.nom %></p>
+
+<div class="detailPokemon">
+    <div class="picPokemon">
+        <img src="/img/<%= pokemon.numero %>.png" alt="">
+    </div>
+    <div class="detailStats">
+        <h2>#<%= pokemon.numero %> <%= pokemon.nom %></h2>
+        <!--Ce sera les types -->
+        <ul class="detailTypes">
+            <% for(const type of pokemonType) {%>
+            <li class="type" style="background-color: #<%=type.color%>;">
+                <a href="/type/<%=type.name%>"><%=type.name%></a>
+            </li>
+            <% } %>
+        </ul>
+        <h3 class="titleStats">Statistics</h3>
+        <table class="detailStatsProgress">
+            <tbody>
+                <!--stats numberStat jauge -->
+                <% for(props in pokemon){ %>
+                <% if (props === "pv") { %>
+                <tr class="<%= props %>">
+
+                    <td>
+                        <label for="<%= props %>"><%= props.toUpperCase() %> </label>
+                    </td>
+                    <td>
+                        <p class="progress-h"><%= pokemon[props] %></p>
+                    </td>
+                    <td>
+                        <div class="progress-grey">
+                            <div class="progress-blue" style="width:100%"><p class="progress-p"><%= pokemon[props] %></p></div>
+                        </div>
+                    </td>
+                </tr>
+                <%} else { %>
+
+                <tr class="<%= props %>">
+                    <td>
+                        <label for="<%= props %>"><%= props.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase()) %> </label>
+                    </td>
+                    <td>
+                        <p class="progress-h"><%= pokemon[props] %></p>
+                    </td>
+                    <td>
+                        <div class="progress-grey">
+                            <div class="progress-blue" style="width: <%= (100*pokemon[props])/255 %>%">
+                                <p class="progress-p"><%= pokemon[props] %></p></div>
+                        </div>
+                    </td>
+                </tr>
+                <% } %>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>
+<p class="backToTheMain"><a href="/">Retour a l'accueil</a></p>
+
+
+<%- include('partials/footer') %>

@@ -1,0 +1,15 @@
+<%- include('partials/header') %>
+
+
+<ul class="allPokemon">
+    <% for(const pokemon of pokedex){ %>
+    <li class="onePokemon">
+        <a href="/details/<%= pokemon.numero%>">
+            <img src="/img/<%=pokemon.numero%>.png">
+            <p>#<%=pokemon.numero %> - <%= pokemon.nom%></p>
+        </a>
+    </li>
+    <% } %>
+</ul>
+
+<%- include('partials/footer') %>
